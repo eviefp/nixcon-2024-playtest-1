@@ -18,4 +18,4 @@ main :: ServerM
 main =
   serve { port: 8080 } { route, router }
   where
-  router { route: Default } = ok $ ""
+  router { route: Default } = ok $ "hi :)"

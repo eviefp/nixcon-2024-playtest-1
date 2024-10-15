@@ -1,2 +1,7 @@
 .nixos-test-history
 *.qcow2
+.direnv
+backend/.spago
+backend/.spago2nix
+backend/output
+backend/.psc-ide-port
