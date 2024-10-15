@@ -11,11 +11,10 @@
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      garnix-lib,
-      ...
+    { self
+    , nixpkgs
+    , garnix-lib
+    , ...
     }:
     let
       system = "x86_64-linux";
@@ -29,7 +28,9 @@
           {
             playerConfig = {
               webserver = (import nixpkgs { inherit system; }).hello;
-              sshKey = "<YOUR_PUBLIC_SSH_KEY>";
+              githubLogin = "eviefp";
+              githubRepo = "nixcon-2024-playtest-1";
+              sshKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINBLUMCHFgEo647k0NSAzVybQLndXxPdVyOaN4ua9DF2 me@eevie.ro";
             };
           }
         ];
