@@ -36,7 +36,6 @@
         ];
       };
 
-      # Remove before starting the workshop - this is just for development
-      checks = import ./checks.nix { inherit nixpkgs self; };
+      # checks = import ./checks.nix { inherit nixpkgs self; };
     };
 }
