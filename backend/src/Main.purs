@@ -5,12 +5,13 @@ import Control.Apply ((<*>))
 import Data.Int (fromString)
 import Data.Maybe (maybe)
 import HTTPurple (class Generic, RouteDuplex', ServerM, badRequest, mkRoute, ok, segment, serve, string, (/))
-import Prelude (show, ($), (+))
+import Prelude (show, ($), (*), (+))
 import Routing.Duplex.Generic as RG
 
 data Route
   = Home
   | Add String String
+  | Mult String String
 
 derive instance Generic Route _
 
@@ -18,6 +19,7 @@ route :: RouteDuplex' Route
 route = mkRoute
   { "Home": RG.noArgs
   , "Add": "add" / string segment / string segment
+  , "Mult": "mult" / string segment / string segment
   }
 
 main :: ServerM
@@ -26,3 +28,4 @@ main =
   where
   router { route: Home } = ok $ "hi :)"
   router { route: Add a b } = maybe (badRequest "") (\r -> ok $ show r) ((+) <$> fromString a <*> fromString b)
+  router { route: Mult a b } = maybe (badRequest "") (\r -> ok $ show r) ((*) <$> fromString a <*> fromString b)
