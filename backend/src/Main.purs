@@ -38,4 +38,4 @@ main =
   router { route: Add a b } = maybe (badRequest "") (\r -> ok $ show r) ((+) <$> fromString a <*> fromString b)
   router { route: Mult a b } = maybe (badRequest "") (\r -> ok $ show r) ((*) <$> fromString a <*> fromString b)
   router { route: Cowsay message } =
-    liftEffect (Process.execSync ("cowsay " <> message) >>= Buffer.toString Encoding.UTF8) >>= ok
+    liftEffect (Process.execSync ("cowsay " <> message) >>= Buffer.toString Encoding.ASCII) >>= ok
