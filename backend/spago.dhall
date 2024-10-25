@@ -11,7 +11,7 @@ When creating a new Spago project, you can use
 to generate this file without the comments in this block.
 -}
 { name = "my-project"
-, dependencies = [ "prelude", "effect", "httpurple", "routing-duplex", "integers" ]
+, dependencies = [ "prelude", "effect", "httpurple", "routing-duplex", "integers", "node-child-process", "node-buffer" ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs" ]
 }

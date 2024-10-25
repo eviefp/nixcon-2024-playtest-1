@@ -461,6 +461,18 @@ let
         installPhase = "ln -s $src $out";
       };
 
+    "node-child-process" = pkgs.stdenv.mkDerivation {
+        name = "node-child-process";
+        version = "v11.1.0";
+        src = pkgs.fetchgit {
+          url = "https://github.com/purescript-node/purescript-node-child-process.git";
+          rev = "99fd379bcbcd4dff122f5e68838e7967a9366f79";
+          sha256 = "1y6i7vvxr18fv9lkkymcjmbc76wfs1hf743rqg1bvqq9h5hg4ik5";
+        };
+        phases = "installPhase";
+        installPhase = "ln -s $src $out";
+      };
+
     "node-event-emitter" = pkgs.stdenv.mkDerivation {
         name = "node-event-emitter";
         version = "v3.0.0";
@@ -504,6 +516,18 @@ let
           url = "https://github.com/purescript-node/purescript-node-net.git";
           rev = "e5b315e3be3f21aa2999aa15960334d18a15b5cc";
           sha256 = "0svg9ghixqgf3j9g6akc49pgn28rkxgf03mxl4z6a22rx8zyilf3";
+        };
+        phases = "installPhase";
+        installPhase = "ln -s $src $out";
+      };
+
+    "node-os" = pkgs.stdenv.mkDerivation {
+        name = "node-os";
+        version = "v5.1.0";
+        src = pkgs.fetchgit {
+          url = "https://github.com/purescript-node/purescript-node-os.git";
+          rev = "c1b8e378c395b84f6973e688d9f38bc60a1f6f2b";
+          sha256 = "1zr04ahqz3h6sggm0h0qymhnxnxg952ab6p19hw5lm6smchn4k0y";
         };
         phases = "installPhase";
         installPhase = "ln -s $src $out";

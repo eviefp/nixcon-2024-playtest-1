@@ -32,9 +32,11 @@
         ];
       };
       backendPackage = pkgs.callPackage ./backend { };
-      backend = pkgs.writeShellScriptBin "runBackend" ''
-        ${pkgs.lib.getExe pkgs.nodejs} ${backendPackage}/backend.js
-      '';
+      backend = pkgs.writeShellApplication {
+        name = "backend";
+        runtimeInputs = [ pkgs.cowsay ];
+        text = ''${pkgs.lib.getExe pkgs.nodejs} ${backendPackage}/backend.js'';
+      };
     in
     {
       devShells.x86_64-linux.default = pkgs.mkShell {
