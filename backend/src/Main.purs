@@ -8,6 +8,7 @@ import Data.Int (fromString)
 import Data.Maybe (maybe)
 import Data.Semigroup ((<>))
 import Data.String as String
+import Data.UUID as UUID
 import Effect.Class (liftEffect)
 import HTTPurple (class Generic, RouteDuplex', ServerM, badRequest, mkRoute, ok, segment, serve, string, (/))
 import Node.Buffer.Class as Buffer
@@ -21,6 +22,7 @@ data Route
   | Add String String
   | Mult String String
   | Cowsay String
+  | Uuid
 
 derive instance Generic Route _
 
@@ -30,6 +32,7 @@ route = mkRoute
   , "Add": "add" / string segment / string segment
   , "Mult": "mult" / string segment / string segment
   , "Cowsay": "cowsay" / string segment
+  , "Uuid": "uuid" / RG.noArgs
   }
 
 main :: ServerM
@@ -41,3 +44,4 @@ main =
   router { route: Mult a b } = maybe (badRequest "") (\r -> ok $ show r) ((*) <$> fromString a <*> fromString b)
   router { route: Cowsay message } =
     liftEffect (Process.execSync ("cowsay " <> message) >>= Buffer.toString Encoding.ASCII) >>= ok <<< String.replaceAll (String.Pattern " \n") (String.Replacement "\n")
+  router { route: Uuid } = liftEffect UUID.genUUID >>= ok <<< show
